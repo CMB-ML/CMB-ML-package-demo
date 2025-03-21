@@ -1,0 +1,9 @@
+defaults:
+  - new_dir        : test
+  - local_system   : generic_lab
+  - splits         : "1-1"
+  - file_system    : common_fs
+  - _self_
+
+a: 1
+b: 2

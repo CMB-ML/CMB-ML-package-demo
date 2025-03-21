@@ -1,0 +1,2 @@
+sim_folder_prefix           : "different value than CMB-ML"
+sim_str_num_digits          : 8
