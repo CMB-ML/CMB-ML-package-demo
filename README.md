@@ -4,6 +4,26 @@ This repo serves as a testbed for the CBM-ML repository installed as a package. 
 
 Note that nothing in this repository tells Hydra where to find configurations. All of that is set up when CMB-ML is installed with pip.
 
+# New Environment Variable
+
+Set `CMB_ML_DATA` to the location of your CMB-ML data. Remove any keys for CMB_ML_LOCAL_SYSTEM (or the other one). We no longer use multiple configs for different local systems (it can still be done, just by editing the version of the config installed with miniconda).
+
+The variable should be the folder where Datasets and Assets are located.
+
+For instance, the local system YAML used to be"
+```yaml
+datasets_root    : "/data/jim/CMB_Data/Datasets/"
+assets_dir       : "/data/jim/CMB_Data/Assets/"
+```
+
+It has been replaced with:
+```yaml
+datasets_root    : "${oc.env:CMB_ML_DATA}/Datasets/"
+assets_dir       : "${oc.env:CMB_ML_DATA}/Assets/"
+```
+
+So I would set the variable with `export CMB_ML_DATA="/data/jim/CMB_Data"`.
+
 # Installation
 
 To use CMB-ML in that way:
@@ -12,6 +32,8 @@ To use CMB-ML in that way:
     - `cd cmb-ml`
     - `git switch whatever`
 - Create the conda environment 
+    - remove old conda installations (and Poetry... which can be gotten rid of as a whole)
+        - `conda remove -n cmb-ml --all`
     - still required due to either namaster or torch... this could be fixed soon, possibly
     - `conda env create -f env.yaml`
     - To change the name of the environment, edit the file or use a different command.
